@@ -3,7 +3,7 @@ using ProEventos.Domain;
 
 namespace ProEventos.Application.Contratos
 {
-    public interface IEventosServices
+    public interface IEventoService
     {
          Task<Evento> AddEvento(Evento model);
          Task<Evento> UpdateEvento(int eventoId, Evento model);
