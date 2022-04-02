@@ -1,0 +1,91 @@
+<app-titulo [titulo]="'Eventos'"></app-titulo>
+
+<div class="row row-cols-lg-auto g-3 align-items-center" >
+  <div>
+    <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
+    <div class="input-group">
+      <span class="input-group-text" id="inputGroup-sizing-default">Filtro: </span>
+      <input type="text" class="form-control" placeholder="buscar"
+      [(ngModel)]="filtroLista"
+      />
+    </div>
+  </div>
+  <!-- <div>
+    <button type="submit" class="btn btn-outline-success">Buscar</button>
+  </div> -->
+</div>
+<!-- <h3>Filtro: {{filtroLista}}</h3> -->
+<hr>
+
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th><button type="button" class="btn btn-outline-light btn-sm" (click)="changeImage()">
+        <i class="{{!showImage ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+        {{!showImage ? 'Exibir' : 'Ocultar'}}
+      </button></th>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Tema</th>
+      <th class="text-center" scope="col">Local</th>
+      <th class="text-center" scope="col">Data</th>
+      <th class="text-center" scope="col">Qtd Pessoas</th>
+      <th class="text-center" scope="col">Lote</th>
+      <th class="text-center" scope="col">Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="eventos && eventos.length">
+      <tr *ngFor="let evento of eventosFiltrados">
+        <td>
+          <img [collapse]="!showImage" src="/assets/{{evento.imagemURL}}"
+            [isAnimated] ="true"
+            alt=""
+            [style.width.px]="widthImg"
+            [style.height.px]="heightImg"
+            [style.margin.px]="marginImg"
+          >
+        </td>
+        <td class="text-center">{{evento.id}}</td>
+        <td class="text-center">{{evento.tema}}</td>
+        <td class="text-center">{{evento.local}}</td>
+        <td class="text-center">{{evento.dataEvento | DateTimeFormatPipe}}</td>
+        <td class="text-center">{{evento.qtdPessoas}}</td>
+        <td class="text-center">{{evento.lotes[0].nome | uppercase}}</td>
+        <td>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+          <button type="button" class="btn btn-primary me-md-2 btn-sm" tooltip="Editar">
+            <i class="fa fa-edit"></i>
+            <!-- Editar -->
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template)">
+            <i class="fa fa-trash"></i>
+            <!-- Excluir -->
+          </button>
+        </div>
+        </td>
+      </tr>
+</tbody>
+<tfoot *ngIf="!eventos.length">
+  <tr>
+    <td colspan="8" class="text-center">
+      <h4>Nenhum evento encontrado!</h4>
+    </td>
+  </tr>
+</tfoot>
+  </table>
+
+  <!-- {{ eventos | json }} -->
+
+  <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Tem certeza que quer deletar este evento?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+    </div>
+  </ng-template>
+
+<!-- <div *ngFor="let evento of eventos">
+  __________________________________________________________________________
+  <p><b>Tema: </b>{{evento.tema}}</p>
+  <p><b>Local: </b>{{evento.local}}</p>
+ </div>
+ ___________________________________________________________________________ -->
