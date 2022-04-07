@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class TituloComponent implements OnInit {
   @Input() titulo: string | undefined;
   @Input() iconClass = 'fa fa-user';
-  @Input() subtitulo = 'Dese 2201';
+  @Input() subtitulo = 'Desde 2201';
   @Input() botaoListar = false;
 
   constructor(private router: Router) { }
