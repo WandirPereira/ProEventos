@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProEventos.Domain
 {
+    // [Table("EventosDetalhes")]  //Altera nome da tabela no BD
     public class Evento
     {
+        // [Key]
+        // public int EventoCodido { get; set; }
         public int Id { get; set; }
         public string Local { get; set; }
         public DateTime? DataEvento { get; set; }
+        // [NotMapped]  //campo calculado nãofaz parte da tabela
+        // public int ContagemDias {get; set}
+        [Required]
         public string Tema { get; set; }
         public int QtdPessoas { get; set; }
         // public string Lote { get; set; }
