@@ -103,7 +103,7 @@ namespace ProEventos.API.Controllers
                 if (evento == null) return NoContent();
 
                 return await _eventoService.DeleteEvento(id)?
-                     Ok("Registro excluido!") :
+                     Ok(new { message = "Deletado"} ) :
                      throw new Exception("Erro ao tentar excluir eventos");
                 // else
                 //      return BadRequest("Erro ao tentar excluir evento!");

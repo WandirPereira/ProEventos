@@ -8,7 +8,7 @@
         <label>Tema</label>
         <input type="text"
         class="form-control"
-        [ngClass]="{'is-invalid': f.tema.errors && f.tema.touched}"
+        [ngClass]= "cssValidator(f.tema)"
           formControlName="tema"
           placeholder="Insira o Tema"
         >
@@ -29,7 +29,7 @@
         <label>Local</label>
         <input type="text"
         class="form-control"
-        [ngClass]="{'is-invalid': f.local.errors && f.local.touched}"
+        [ngClass]="cssValidator(f.local)"
           formControlName="local" placeholder=""
         >
         <div *ngIf="f.local.errors?.required  && f.local.touched" class="invalid-feedback">
@@ -41,8 +41,10 @@
         <label>Data e Hora</label>
         <input type="datetime"
           class="form-control"
-          [ngClass]="{'is-invalid': f.dataEvento.errors && f.dataEvento.touched}"
+          [ngClass]="cssValidator(f.dataEvento)"
           formControlName="dataEvento" placeholder=""
+          bsDatepicker
+          [bsConfig]="bsConfig"
         >
         <div *ngIf="f.dataEvento.errors?.required && f.dataEvento.touched" class="invalid-feedback">
           Data e hora são obrigatórios!
@@ -108,7 +110,7 @@
       <button class="btn btn-outline-secondary me-auto border"  (click)="resetForm($event)" >
         Cancelar Alteração
       </button>
-      <button class="btn btn-success" [disabled]="!form.valid">
+      <button class="btn btn-success" [disabled]="!form.valid" (click)="salvarAlteracao()">
         <!-- <span class="spinner-border spinner-border-sm me-1"></span> -->
         Salvar Evento
       </button>
